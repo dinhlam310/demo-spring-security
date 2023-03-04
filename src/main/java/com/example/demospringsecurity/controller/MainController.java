@@ -33,8 +33,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(Model model) {
-
+    public String loginPage() {
         return "loginPage";
     }
 

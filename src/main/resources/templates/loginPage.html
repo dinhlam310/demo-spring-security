@@ -1,27 +1,33 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+
+    <link rel="stylesheet" href="./Login.css">
 </head>
 <body>
-<!-- Include _menu.html -->
+
 <th:block th:include="/_menu"></th:block>
 
 <h1>Login</h1>
 
 <!-- /login?error=true -->
 <div th:if="${#request.getParameter('error') == 'true'}"
-     style="color:red;margin:10px 0px;">
+     style="color:rgb(51, 42, 42);margin:10px 0;">
     Login Failed!!!<br />
     Reason :
-    <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+    <span th:if="${#session != null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION')?.message != null}"
           th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
                 Static summary
-         </span>
-
+    </span>
 </div>
 
-<h3>Enter user name and password:</h3>
+
+<h3>Enter username and password:</h3>
+
 <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
     <table>
         <tr>
@@ -42,6 +48,31 @@
     </table>
 </form>
 
+<!--<div class="login-box">-->
+<!--    <p>Login</p>-->
+<!--    <form name='f' th:action="@{/j_spring_security_check}" method='POST'>-->
+
+<!--        <div class="user-box">-->
+<!--            <input required="" name='username' type="text">-->
+<!--            <label>Email</label>-->
+<!--        </div>-->
+
+<!--        <div class="user-box">-->
+<!--            <input required="" name="password" type="password" id="password">-->
+<!--            <label>Password</label>-->
+<!--            <span class="toggle-password" onclick="togglePassword()">Show</span>-->
+<!--        </div>-->
+<!--        <a href="#">-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            Submit-->
+<!--        </a>-->
+<!--    </form>-->
+<!--    <p>Don't have an account? <a href="#" class="a2">Sign up!</a></p>-->
+<!--</div>-->
+
 <br>
 Username/pass:
 <ul>
@@ -49,6 +80,19 @@ Username/pass:
     <li>dbadmin1/123</li>
 </ul>
 
+
+<!--<script>-->
+<!--    function togglePassword() {-->
+<!--        var passwordInput = document.getElementById("password");-->
+<!--        if (passwordInput.type === "password") {-->
+<!--            passwordInput.type = "text";-->
+<!--            document.getElementsByClassName("toggle-password")[0].innerHTML = "Hide";-->
+<!--        } else {-->
+<!--            passwordInput.type = "password";-->
+<!--            document.getElementsByClassName("toggle-password")[0].innerHTML = "Show";-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 </body>
 
 </html>
